@@ -1,7 +1,7 @@
 FROM php:7.4-apache-bullseye
 
 RUN apt update
-RUN apt install -y git zip
+RUN apt install -y git zip jq
 RUN docker-php-ext-install pdo_mysql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

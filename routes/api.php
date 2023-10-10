@@ -14,12 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::get('/events', 'Api\EventController@index');
 Route::get('/events/{id}', 'Api\EventController@show');
 
-Route::post('/events', 'Api\EventController@store');
-Route::delete('/events/{id}', 'Api\EventController@destroy');
+Route::post('/signup', 'Api\UserController@createUser');
+Route::post('/signin', 'Api\UserController@loginUser');
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/events', 'Api\EventController@store');
+    Route::delete('/events/{id}', 'Api\EventController@destroy');
+
+});
