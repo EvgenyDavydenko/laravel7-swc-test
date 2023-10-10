@@ -12,5 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UserSeeder::class);
+        factory(\App\Models\User::class, 5)->create()->each(
+            function($user) {
+                factory(\App\Models\Event::class, 3)->create(['creator_id' => $user->id]);
+            }
+        );
     }
 }
